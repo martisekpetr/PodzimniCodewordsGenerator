@@ -8,7 +8,7 @@ def convert(s):
     return unidecode(s).upper()
 
 
-# nacte tabulku pismena ze souboru, format: PISMENO X Y (kazde pismeno na vlastnim radku
+# nacte tabulku pismena ze souboru, format: PISMENO X Y (kazde pismeno na vlastnim radku)
 def load_letter_table(filename):
     table = {}
     with open(filename) as f:
@@ -20,18 +20,18 @@ def load_letter_table(filename):
 
 # nacte slovnik ze souboru, kazde slovo na vlastnim radku
 def load_dictionary(filename):
-    corpus = []
+    dictionary = []
     with open(filename) as f:
         for line in f:
             if len(line.strip()) <= max_length:
-                corpus.append(convert(line.strip()))
-    return corpus
+                dictionary.append(convert(line.strip()))
+    return dictionary
 
 
 # spocte cilovy vektor pro slovo
-def get_target_vector(s, table):
+def get_target_vector(word, table):
     target_x, target_y = 0, 0
-    for letter in s:
+    for letter in word:
         if letter not in table:
             return None
         (x, y) = table[letter]
@@ -46,9 +46,9 @@ def hamming(s1, s2):
 
 
 # spocte minimum z hammingovskych vzdalenosti daneho slova ke vsem ostatnim slovum v korpusu
-def get_min_hamming_distance(word, corpus):
+def get_min_hamming_distance(word, dictionary):
     min_distance = len(word) + 1
-    for other in corpus:
+    for other in dictionary:
         if len(word) == len(other) and word != other:
             dist = hamming(word, other)
             if dist < min_distance:
@@ -71,15 +71,15 @@ if len(sys.argv) >= 4:
 # nacti tabulku
 table = load_letter_table(table_file)
 # nacti slovnik
-corpus = load_dictionary(dict_file)
+dictionary = load_dictionary(dict_file)
 
 # codewords obsahuje pro kazdy vektor seznam slov, ktere na nej vedou (serazene sestupne podle robustnosti)
-# (robustnost = minimalni hamingovska vzdalenost ke zbytku korpusu)
+# (robustnost = minimalni hamingovska vzdalenost ke zbytku slovniku)
 codewords = {}
-for word in corpus:
+for word in dictionary:
     vector = get_target_vector(word, table)
     if vector is not None:
-        distance = get_min_hamming_distance(word, corpus)
+        distance = get_min_hamming_distance(word, dictionary)
         if vector in codewords:
             codewords[vector].append((word, distance))
         else:

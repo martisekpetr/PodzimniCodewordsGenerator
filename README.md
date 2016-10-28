@@ -1,31 +1,37 @@
-# Generátor kódu pro systém pøesunù z šifrovaèky Podzimní 2016
+# GenerÃ¡tor kÃ³dovÃ½ch slov pro systÃ©m pÅ™esunÅ¯ z Å¡ifrovaÄky PodzimnÃ­ 2016
+VÃ­ce o systÃ©mu zde: http://www.sifrovacihra.cz/informace.aspx (credits: Martin Mach)
 
-Pouití (Python 3.0+): `python codewords_generator.py LETTER-TABLE-FILE DICTIONARY-FILE [MAX-WORD-LENGTH]`
+## Requirements
+Python 3.0+
+
+## FormÃ¡t vstupu
+`python codewords_generator.py LETTER-TABLE-FILE DICTIONARY-FILE [MAX-WORD-LENGTH]`
 
 kde:
-* LETTER-TABLE-FILE je soubor obsahující kódovací tabulku ve formátu: PÍSMENO X Y, kadé písmeno na vlastním øádku. X a Y vyjadøují posun v pøíslušné souøadnici, x roste smìrem doprava a y roste smìrem nahoru (napø. A -1 1 znaèí posun o 1 pole doleva a o 1 pole nahoru). Pøíklad tabulky:
-  A -1 1
-  B 1 2
-  C 2 2
-  ...
-  Tabulka z Podzimní 2016 je k dispozici v souboru letter_table.txt.
+* LETTER-TABLE-FILE je soubor obsahujÃ­cÃ­ kÃ³dovacÃ­ tabulku ve formÃ¡tu: PÃSMENO X Y, kaÅ¾dÃ© pÃ­smeno na vlastnÃ­m Å™Ã¡dku. X a Y vyjadÅ™ujÃ­ posun v pÅ™Ã­sluÅ¡nÃ© souÅ™adnici, x roste smÄ›rem doprava a y roste smÄ›rem nahoru (napÅ™. A -1 1 znaÄÃ­ posun o 1 pole doleva a o 1 pole nahoru). PÅ™Ã­klad tabulky:  
+  A -1 1  
+  B 1 2  
+  C 2 2  
+  ...  
+  Tabulka z PodzimnÃ­ 2016 je k dispozici v souboru **letter_table.txt**.
   
-* DICTIONARY-FILE je soubor se slovníkem, kadé slovo na vlastním øádku. Diakritika bude zahozena a všechna písmena pøevedena na velká. Pouitelnı slovník èeskıch podstatnıch jmen (nekompletní) je v souboru dict.txt
+* DICTIONARY-FILE je soubor se slovnÃ­kem, kaÅ¾dÃ© slovo na vlastnÃ­m Å™Ã¡dku. Diakritika bude zahozena a vÅ¡echna pÃ­smena pÅ™evedena na velkÃ¡. PouÅ¾itelnÃ½ slovnÃ­k ÄeskÃ½ch podstatnÃ½ch jmen (nekompletnÃ­) je v souboru **dict.txt**
 
-* MAX-WORD-LENGTH je nepovinnı parametr omezující délku pouitıch slov. Není-li pøítomen, je maximální délka nastavena na 100 (tedy prakticky neomezena).
+* MAX-WORD-LENGTH je nepovinnÃ½ parametr omezujÃ­cÃ­ dÃ©lku pouÅ¾itÃ½ch slov. NenÃ­-li pÅ™Ã­tomen, je maximÃ¡lnÃ­ dÃ©lka nastavena na 100 (tedy prakticky neomezena).
 
-## Vıstup
+## VÃ½stup
  
-Vıstupem je soubor codewords.txt, v nìm je pro kadı vektor (x,y) dosaitelnı pomocí nìjakého slova ze slovníku vypsán seznam slov, kterımi lze tohoto vektoru dosáhnout, a to v sestupném poøadí podle "robustnosti" slova. Robustností se rozumí minimální hammingovská vzdálenost daného slova k libovolnému jinému slovu ze slovníku. Má-li tedy slovo robustnost aspoò 2, pak pøi øešení šifry chyba v jediném písmenu nikdy nedá jiné smysluplné slovo (resp. jiné slovo ze slovníku). Formát vıstupu:
+VÃ½stupem je soubor **codewords.txt**, v nÄ›mÅ¾ je pro kaÅ¾dÃ½ vektor (x,y) dosaÅ¾itelnÃ½ pomocÃ­ nÄ›jakÃ©ho slova ze slovnÃ­ku vypsÃ¡n seznam slov, kterÃ½mi lze tohoto vektoru dosÃ¡hnout, a to v sestupnÃ©m poÅ™adÃ­ podle *robustnosti* slova. RobustnostÃ­ se rozumÃ­ minimÃ¡lnÃ­ hammingovskÃ¡ vzdÃ¡lenost danÃ©ho slova k libovolnÃ©mu jinÃ©mu slovu ze slovnÃ­ku. MÃ¡-li tedy slovo robustnost aspoÅˆ 2, pak pÅ™i Å™eÅ¡enÃ­ Å¡ifry chyba v jedinÃ©m pÃ­smenu nikdy nedÃ¡ jinÃ© smysluplnÃ© slovo (resp. jinÃ© slovo ze slovnÃ­ku). FormÃ¡t vÃ½stupu:
 
 `X, Y [(SLOVO1, ROBUSTNOST1), (SLOVO2, ROBUSTNOST2), ...]` 
 
-Pøiloenı soubor 'codewords.txt' byl vygenerován pøíkazem `python 
-codewords_generator.py letter_table.txt dict.txt 10`
+PÅ™iloÅ¾enÃ½ soubor **codewords.txt** byl vygenerovÃ¡n pÅ™Ã­kazem `python codewords_generator.py letter_table.txt dict.txt 10`
 
+
+***
 
 POZN.:
-Kvùli poèítání hammingovskıch vzdáleností má program èasovou sloitost O(n^2), bìh tedy mùe nìjakou chvíli trvat (v závislosti na velikosti slovníku).
+KvÅ¯li poÄÃ­tÃ¡nÃ­ hammingovskÃ½ch vzdÃ¡lenostÃ­ mÃ¡ program Äasovou sloÅ¾itost O(n^2), bÄ›h tedy mÅ¯Å¾e nÄ›jakou chvÃ­li trvat (v zÃ¡vislosti na velikosti slovnÃ­ku).
 
 
 

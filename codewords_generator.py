@@ -58,7 +58,7 @@ def get_min_hamming_distance(word, dictionary):
 
 # HLAVNI SKRIPT
 
-# parametry prikazove radky: letter_tablle_file dictionary_file [max_word_length]
+# parametry prikazove radky: letter_table_file dictionary_file [max_word_length]
 if len(sys.argv) < 3:
     exit()
 table_file = sys.argv[1]
